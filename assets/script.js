@@ -1,7 +1,30 @@
+var timeDisplayEl = $('#time-display');
+var saveButtonEl = $('.saveBtn');
+var todoInputEl = $('.description');
+
+function displayTime() {
+  var rightNow = dayjs().format('MMM DD, YYYY [at] hh:mm:ss a');
+  timeDisplayEl.text(rightNow);
+}
+
+$(document).ready(function() {
+  $('textarea').each(function(){
+    var id = parseInt($(this).attr('id')); 
+    //console.log typeof = number
+    var currentHour = dayjs().hour();
+    //console.log typeof = number
+    if (currentHour === id){
+      
+    }
+    // if //(currentHour === id hour) background green
+  if //currentHour > id hour) background red
+  else //currentHour < id hour) background gray
+  });
+});
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
-$(function () {
+
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -18,6 +41,31 @@ $(function () {
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
-});
+  
+
+
+function handleTodosFromSave(event) {
+  event.preventDefault();
+
+  var todoDescription = todoInputEl.val().trim();
+  console.log(todoDescription);
+  localStorage.setItem('todoDescription',JSON.stringify(todoDescription));
+}
+
+// function changeBackground {
+//   //var currentHour = dayjs().hour();
+//   //var plannerTime =
+//   if //(currentHour === id hour) background green
+//   if //currentHour > id hour) background red
+//   else //currentHour < id hour) background gray
+
+// }
+
+saveButtonEl.on('click', handleTodosFromSave);
+
+
+displayTime();
+setInterval(displayTime, 1000);
+
+
+//parseInt changes a string to an integer
