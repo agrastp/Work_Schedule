@@ -1,8 +1,6 @@
+//Time and Date Display 
+
 var timeDisplayEl = $('#time-display');
-var saveButtonEl = $('.saveBtn');
-var todoInputEl = $('.description');
-var planner = $('.container-lg');
-var todoHourEl = dayjs().hour();
 
 
 function displayTime() {
@@ -10,78 +8,51 @@ function displayTime() {
   timeDisplayEl.text(rightNow);
 }
 
+
+//Page is ready when rendered & compares current hour to planner time
+
 $(document).ready(function () {
   $('textarea').each(function () {
     var id = parseInt($(this).attr('id'));
-    //console.log typeof = number
     var currentHour = dayjs().hour();
-    //console.log typeof = number
     if (currentHour === id) {
-      this.style.backgroundColor = "green"
-    }
-    if (currentHour > id) {
       this.style.backgroundColor = "red"
     }
-      if (currentHour < id) {
-        this.style.backgroundColor = "gray"
-      }
-
-    
-    });
+    if (currentHour > id) {
+      this.style.backgroundColor = "gray"
+    }
+    if (currentHour < id) {
+      this.style.backgroundColor = "green"
+    }
   });
+});
+
+//When Save Buttons are clicked, todo and time will be 'set' into local storage
+
+var saveButtonEl = document.querySelectorAll("button.saveBtn");
+var todos = document.querySelectorAll("textarea.description");
+saveButtonEl.forEach((btn, i) => {
+  btn.addEventListener("click", function (event) {
+    const textarea = todos[i]
+    localStorage.setItem(`todo_item_${i}`, textarea.value)
+  });
+})
 
 
-
-
-
-  
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
-
-// TODO: Add a listener for click events on the save button. This code should
-// use the id in the containing time-block as a key to save the user input in
-// local storage. HINT: What does `this` reference in the click listener
-// function? How can DOM traversal be used to get the "hour-x" id of the
-// time-block containing the button that was clicked? How might the id be
-// useful when saving the description in local storage?
-//
-// TODO: Add code to apply the past, present, or future class to each time
-// block by comparing the id to the current hour. HINTS: How can the id
-// attribute of each time-block be used to conditionally add or remove the
-// past, present, and future classes? How can Day.js be used to get the
-// current hour in 24-hour time?
-//
-// TODO: Add code to get any user input that was saved in localStorage and set
-// the values of the corresponding textarea elements. HINT: How can the id
-// attribute of each time-block be used to do this?
-
-
-
-function handleTodosFromSave(event) {
-  event.preventDefault();
-  var todoDescription = todoInputEl.val().trim();
-  
-
-  console.log(todoDescription);
-
-  var plannerEl = $('textarea').attr('id');
-
-  for(let i = 0; i < plannerEl.length; i++)
-   localStorage.setItem("todoDescription" ,JSON.stringify(todoDescription));
-
- 
+//Renders the saved items in local storage so they do not disappear when page reloads
+function SavedPlannerItems() {
+  todos.forEach((textarea, i) => {
+    var savedText = localStorage.getItem(`todo_item_${i}`);
+    if (!savedText) {
+      return;
+    }
+    textarea.textContent = savedText;
+  });
 }
 
-//There is something not working here to generate more than 1 todo AND I need to connect the id with the description
 
-
-
-
-
-saveButtonEl.on('click', handleTodosFromSave);
-
-
+//Functions to be called when website loads
+SavedPlannerItems();
 displayTime();
 setInterval(displayTime, 1000);
 
