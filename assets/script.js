@@ -13,7 +13,8 @@ function displayTime() {
 
 $(document).ready(function () {
   $('textarea').each(function () {
-    var id = parseInt($(this).attr('id'));
+    var parentId = $(this).parent().attr('id').split("-")[1];
+    var id = parseInt(parentId);
     var currentHour = dayjs().hour();
     if (currentHour === id) {
       this.style.backgroundColor = "red"
@@ -24,35 +25,14 @@ $(document).ready(function () {
     if (currentHour < id) {
       this.style.backgroundColor = "green"
     }
+    $(this).val(localStorage.getItem(parentId))
+    $(this).siblings(".btn").on("click", function () {
+    localStorage.setItem(parentId, $(this).siblings("textarea").val());
+    })
   });
 });
 
-//When Save Buttons are clicked, todo and time will be 'set' into local storage
 
-var saveButtonEl = document.querySelectorAll("button.saveBtn");
-var todos = document.querySelectorAll("textarea.description");
-saveButtonEl.forEach((btn, i) => {
-  btn.addEventListener("click", function (event) {
-    const textarea = todos[i]
-    localStorage.setItem(`todo_item_${i}`, textarea.value)
-  });
-})
-
-
-//Renders the saved items in local storage so they do not disappear when page reloads
-function SavedPlannerItems() {
-  todos.forEach((textarea, i) => {
-    var savedText = localStorage.getItem(`todo_item_${i}`);
-    if (!savedText) {
-      return;
-    }
-    textarea.textContent = savedText;
-  });
-}
-
-
-//Functions to be called when website loads
-SavedPlannerItems();
 displayTime();
 setInterval(displayTime, 1000);
 
