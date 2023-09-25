@@ -1,7 +1,12 @@
+/* I deleted the classes past, present, future from HTML so I also deleted the styling in CSS.  
+The styling is now in JavaScript. */
+
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
 }
+
+/* Text Areas */
 
 textarea {
   background: transparent;
@@ -16,6 +21,8 @@ textarea {
   white-space: pre-wrap;
 }
 
+/* Time Component */
+
 .time-block {
   border-radius: 15px;
 }
@@ -29,6 +36,8 @@ textarea {
   color: #000000;
   border-top: 1px dashed #000000;
 }
+
+/* Buttons */
 
 .saveBtn {
   border-left: 1px solid black;

@@ -9,7 +9,10 @@ function displayTime() {
 }
 
 
-//Page is ready when rendered & compares current hour to planner time
+//Page is ready when rendered & compares current hour to planner time using color coding.
+//Red is in the present, gray is in the past, and green is in the future.
+//Gets the hour and textarea todo to store in local storage.
+//Renders back on page by pulling from local storage.
 
 $(document).ready(function () {
   $('textarea').each(function () {

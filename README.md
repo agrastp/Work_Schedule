@@ -12,16 +12,18 @@ N/A
 This can be used as a work schedule.  With very little changes to the code, it could become schedule for the home. Time could also easily be altered in the code for an earlier start or a later end to the day.  
 
 
-![Webpage Example](./website.png?raw=true "Webpage Example")
+![Webpage Example](./assets/work-schedule.png?raw=true "Webpage Example")
 
 
 ## Credits
 
 [https://www.w3schools.com] and [https://developer.mozilla.org/en-US/] for general information
 
-I referred to some Stack Overflow conversations to generate some ideas of what to try in the coding process.
+[https://jquery.com/] for jQuery documentation.
 
-I conversed about this project with a fellow classmate, Sarah Leder.  We helped 
+I referred to some Stack Overflow conversations to generate some ideas of what to try in the color coding process.
+
+My tutor Alex Gonzalaz helped me to refer to documentation.  I had coded the JS in one way and he challenged me to do it in another way.  I ended up liking this solution better. 
 
 
 ## License
